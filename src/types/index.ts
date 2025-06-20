@@ -68,3 +68,41 @@ export interface PaymentMethod {
   type: 'cash' | 'transfer' | 'qr';
   icon: string;
 }
+
+export interface Farmer {
+  id: string;
+  name: string;
+  location: string;
+  avatar: string;
+  rating: number;
+  totalProducts: number;
+  joinedDate: string;
+  description: string;
+  isOnline: boolean;
+  lastSeen?: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  senderId: string;
+  senderName: string;
+  senderType: 'customer' | 'farmer';
+  message: string;
+  timestamp: string;
+  type: 'text' | 'image' | 'product';
+  productId?: string;
+  imageUrl?: string;
+  isRead: boolean;
+}
+
+export interface ChatRoom {
+  id: string;
+  farmerId: string;
+  customerId: string;
+  farmerName: string;
+  customerName: string;
+  lastMessage?: ChatMessage;
+  unreadCount: number;
+  createdAt: string;
+  updatedAt: string;
+}

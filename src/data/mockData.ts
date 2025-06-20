@@ -1,4 +1,4 @@
-import { Product, User, PointsTransaction, PointsReward, PaymentMethod } from '../types';
+import { Product, User, PointsTransaction, PointsReward, PaymentMethod, Farmer, ChatMessage, ChatRoom } from '../types';
 
 export const mockProducts: Product[] = [
   {
@@ -199,5 +199,192 @@ export const paymentMethods: PaymentMethod[] = [
     name: 'สแกน QR Code',
     type: 'qr',
     icon: '📱'
+  }
+];
+
+export const mockFarmers: Farmer[] = [
+  {
+    id: 'farmer1',
+    name: 'สวนป้าสมใจ',
+    location: 'นครปฐม',
+    avatar: 'https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=100',
+    rating: 4.8,
+    totalProducts: 12,
+    joinedDate: '2022-03-15',
+    description: 'เกษตรกรรุ่นใหม่ที่ใส่ใจในการปลูกผักปลอดสารพิษ มีประสบการณ์ 15 ปี',
+    isOnline: true
+  },
+  {
+    id: 'farmer2',
+    name: 'ไร่ลุงสมชาย',
+    location: 'สุรินทร์',
+    avatar: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=100',
+    rating: 4.9,
+    totalProducts: 8,
+    joinedDate: '2021-11-20',
+    description: 'เกษตรกรผู้เชี่ยวชาญด้านข้าวหอมมะลิ ได้รับรางวัลข้าวดีเด่นระดับจังหวัด',
+    isOnline: false,
+    lastSeen: '2024-01-20T10:30:00Z'
+  },
+  {
+    id: 'farmer3',
+    name: 'สวนป้าแก้ว',
+    location: 'ระยอง',
+    avatar: 'https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg?auto=compress&cs=tinysrgb&w=100',
+    rating: 4.7,
+    totalProducts: 15,
+    joinedDate: '2022-07-10',
+    description: 'สวนผลไม้ครอบครัว เน้นผลไม้หวานหอม คุณภาพดี ส่งตรงจากสวน',
+    isOnline: true
+  },
+  {
+    id: 'farmer4',
+    name: 'ฟาร์มลุงประสิทธิ์',
+    location: 'สุพรรณบุรี',
+    avatar: 'https://images.pexels.com/photos/1181681/pexels-photo-1181681.jpeg?auto=compress&cs=tinysrgb&w=100',
+    rating: 4.6,
+    totalProducts: 20,
+    joinedDate: '2021-09-05',
+    description: 'ฟาร์มผักไฮโดรโปนิกส์ สะอาด ปลอดภัย ได้มาตรฐาน GAP',
+    isOnline: true
+  },
+  {
+    id: 'farmer5',
+    name: 'สวนป้าวิไล',
+    location: 'ชัยนาท',
+    avatar: 'https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=100',
+    rating: 4.5,
+    totalProducts: 10,
+    joinedDate: '2022-01-25',
+    description: 'สวนมะม่วงโบราณ รสชาติหวานหอม เก็บใหม่ทุกวัน',
+    isOnline: false,
+    lastSeen: '2024-01-19T15:45:00Z'
+  },
+  {
+    id: 'farmer6',
+    name: 'ฟาร์มป้าจันทร์',
+    location: 'เชียงใหม่',
+    avatar: 'https://images.pexels.com/photos/1181684/pexels-photo-1181684.jpeg?auto=compress&cs=tinysrgb&w=100',
+    rating: 4.8,
+    totalProducts: 18,
+    joinedDate: '2021-12-12',
+    description: 'ฟาร์มผักออร์แกนิกในเขตหนาว ผักสด หวาน กรอบ',
+    isOnline: true
+  }
+];
+
+export const mockChatRooms: ChatRoom[] = [
+  {
+    id: 'chat1',
+    farmerId: 'farmer1',
+    customerId: '1',
+    farmerName: 'สวนป้าสมใจ',
+    customerName: 'คุณสมศรี ใจดี',
+    lastMessage: {
+      id: 'msg1',
+      senderId: 'farmer1',
+      senderName: 'สวนป้าสมใจ',
+      senderType: 'farmer',
+      message: 'มะเขือเทศวันนี้สดมากค่ะ เก็บใหม่เมื่อเช้า',
+      timestamp: '2024-01-21T14:30:00Z',
+      type: 'text',
+      isRead: false
+    },
+    unreadCount: 1,
+    createdAt: '2024-01-21T10:00:00Z',
+    updatedAt: '2024-01-21T14:30:00Z'
+  },
+  {
+    id: 'chat2',
+    farmerId: 'farmer3',
+    customerId: '1',
+    farmerName: 'สวนป้าแก้ว',
+    customerName: 'คุณสมศรี ใจดี',
+    lastMessage: {
+      id: 'msg2',
+      senderId: '1',
+      senderName: 'คุณสมศรี ใจดี',
+      senderType: 'customer',
+      message: 'กล้วยหวีไหนหวานที่สุดคะ',
+      timestamp: '2024-01-20T16:45:00Z',
+      type: 'text',
+      isRead: true
+    },
+    unreadCount: 0,
+    createdAt: '2024-01-20T15:00:00Z',
+    updatedAt: '2024-01-20T16:45:00Z'
+  }
+];
+
+export const mockChatMessages: ChatMessage[] = [
+  {
+    id: 'msg1',
+    senderId: '1',
+    senderName: 'คุณสมศรี ใจดี',
+    senderType: 'customer',
+    message: 'สวัสดีค่ะ อยากสอบถามเรื่องมะเขือเทศค่ะ',
+    timestamp: '2024-01-21T10:00:00Z',
+    type: 'text',
+    isRead: true
+  },
+  {
+    id: 'msg2',
+    senderId: 'farmer1',
+    senderName: 'สวนป้าสมใจ',
+    senderType: 'farmer',
+    message: 'สวัสดีค่ะ มีอะไรให้ช่วยไหมคะ',
+    timestamp: '2024-01-21T10:05:00Z',
+    type: 'text',
+    isRead: true
+  },
+  {
+    id: 'msg3',
+    senderId: '1',
+    senderName: 'คุณสมศรี ใจดี',
+    senderType: 'customer',
+    message: 'มะเขือเทศของป้าหวานไหมคะ เก็บมาแล้วกี่วันแล้ว',
+    timestamp: '2024-01-21T10:10:00Z',
+    type: 'text',
+    isRead: true
+  },
+  {
+    id: 'msg4',
+    senderId: 'farmer1',
+    senderName: 'สวนป้าสมใจ',
+    senderType: 'farmer',
+    message: 'หวานมากค่ะ เก็บเมื่อเช้านี้เอง สดใหม่มาก ป้าปลูกแบบออร์แกนิกไม่ใส่สารเคมี',
+    timestamp: '2024-01-21T10:15:00Z',
+    type: 'text',
+    isRead: true
+  },
+  {
+    id: 'msg5',
+    senderId: '1',
+    senderName: 'คุณสมศรี ใจดี',
+    senderType: 'customer',
+    message: 'ดีเลยค่ะ ถ้าซื้อ 2 กิโลจะลดให้ไหมคะ',
+    timestamp: '2024-01-21T10:20:00Z',
+    type: 'text',
+    isRead: true
+  },
+  {
+    id: 'msg6',
+    senderId: 'farmer1',
+    senderName: 'สวนป้าสมใจ',
+    senderType: 'farmer',
+    message: 'ได้ค่ะ ซื้อ 2 กิโลลด 5 บาทให้ เป็น 85 บาทค่ะ',
+    timestamp: '2024-01-21T10:25:00Z',
+    type: 'text',
+    isRead: true
+  },
+  {
+    id: 'msg7',
+    senderId: 'farmer1',
+    senderName: 'สวนป้าสมใจ',
+    senderType: 'farmer',
+    message: 'มะเขือเทศวันนี้สดมากค่ะ เก็บใหม่เมื่อเช้า',
+    timestamp: '2024-01-21T14:30:00Z',
+    type: 'text',
+    isRead: false
   }
 ];

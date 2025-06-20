@@ -1,13 +1,18 @@
 import React from 'react';
-import { Plus, MapPin, Award, Leaf } from 'lucide-react';
+import { Plus, MapPin, Award, Leaf, MessageCircle } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
+  onChatWithFarmer: (farmerName: string) => void;
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+export const ProductCard: React.FC<ProductCardProps> = ({ 
+  product, 
+  onAddToCart, 
+  onChatWithFarmer 
+}) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100 hover:border-[#4CAF50]/30">
       {/* Product Image */}
@@ -55,8 +60,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }
           </div>
         </div>
 
-        {/* Price & Add to Cart */}
-        <div className="flex items-center justify-between">
+        {/* Price & Actions */}
+        <div className="flex items-center justify-between mb-3">
           <div className="text-2xl font-bold text-[#4CAF50]">
             ฿{product.price}
             <span className="text-sm font-normal text-gray-500 ml-1">/{product.unit}</span>
@@ -70,6 +75,15 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }
             <span className="font-semibold">เพิ่ม</span>
           </button>
         </div>
+
+        {/* Chat with Farmer Button */}
+        <button
+          onClick={() => onChatWithFarmer(product.farmer)}
+          className="w-full bg-blue-50 text-blue-600 border border-blue-200 px-4 py-2 rounded-xl hover:bg-blue-100 transition-all duration-200 flex items-center justify-center space-x-2 font-semibold"
+        >
+          <MessageCircle className="w-4 h-4" />
+          <span>แชทกับเกษตรกร</span>
+        </button>
       </div>
     </div>
   );

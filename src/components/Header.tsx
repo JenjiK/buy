@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingCart, User, Star } from 'lucide-react';
+import { ShoppingCart, User, Star, MessageCircle } from 'lucide-react';
 import { CartItem, User as UserType } from '../types';
 
 interface HeaderProps {
@@ -7,9 +7,16 @@ interface HeaderProps {
   user: UserType;
   onCartClick: () => void;
   onPointsClick: () => void;
+  onChatClick: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ cartItems, user, onCartClick, onPointsClick }) => {
+export const Header: React.FC<HeaderProps> = ({ 
+  cartItems, 
+  user, 
+  onCartClick, 
+  onPointsClick,
+  onChatClick 
+}) => {
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -30,7 +37,7 @@ export const Header: React.FC<HeaderProps> = ({ cartItems, user, onCartClick, on
           </div>
 
           {/* User Info & Actions */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-4">
             {/* Points Display */}
             <button
               onClick={onPointsClick}
@@ -38,6 +45,15 @@ export const Header: React.FC<HeaderProps> = ({ cartItems, user, onCartClick, on
             >
               <Star className="w-5 h-5" />
               <span className="font-semibold">{user.points.toLocaleString()} แต้ม</span>
+            </button>
+
+            {/* Chat */}
+            <button
+              onClick={onChatClick}
+              className="flex items-center space-x-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full hover:bg-white/30 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+            >
+              <MessageCircle className="w-5 h-5" />
+              <span className="font-semibold">แชท</span>
             </button>
 
             {/* Cart */}

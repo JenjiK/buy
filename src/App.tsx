@@ -5,18 +5,23 @@ import { Cart } from './components/Cart';
 import { PointsModal } from './components/PointsModal';
 import { CategoryFilter } from './components/CategoryFilter';
 import { OrderSuccess } from './components/OrderSuccess';
-import { mockProducts, mockUser, mockPointsHistory } from './data/mockData';
-import { CartItem, Product, User, PointsTransaction, CustomerInfo, PaymentMethod } from './types';
+import { ChatList } from './components/ChatList';
+import { ChatModal } from './components/ChatModal';
+import { mockProducts, mockUser, mockPointsHistory, mockFarmers } from './data/mockData';
+import { CartItem, Product, User, PointsTransaction, CustomerInfo, PaymentMethod, Farmer } from './types';
 
 function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isPointsModalOpen, setIsPointsModalOpen] = useState(false);
   const [isOrderSuccessOpen, setIsOrderSuccessOpen] = useState(false);
+  const [isChatListOpen, setIsChatListOpen] = useState(false);
+  const [isChatModalOpen, setIsChatModalOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [user, setUser] = useState<User>(mockUser);
   const [pointsHistory, setPointsHistory] = useState<PointsTransaction[]>(mockPointsHistory);
   const [orderDetails, setOrderDetails] = useState<any>(null);
+  const [selectedFarmer, setSelectedFarmer] = useState<Farmer | null>(null);
 
   const filteredProducts = selectedCategory === 'all' 
     ? mockProducts 
@@ -109,6 +114,20 @@ function App() {
     setIsOrderSuccessOpen(true);
   };
 
+  const handleChatWithFarmer = (farmerName: string) => {
+    const farmer = mockFarmers.find(f => f.name === farmerName);
+    if (farmer) {
+      setSelectedFarmer(farmer);
+      setIsChatModalOpen(true);
+    }
+  };
+
+  const handleSelectChat = (farmer: Farmer) => {
+    setSelectedFarmer(farmer);
+    setIsChatListOpen(false);
+    setIsChatModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F5F5DC] to-white">
       <Header
@@ -116,6 +135,7 @@ function App() {
         user={user}
         onCartClick={() => setIsCartOpen(true)}
         onPointsClick={() => setIsPointsModalOpen(true)}
+        onChatClick={() => setIsChatListOpen(true)}
       />
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -141,6 +161,7 @@ function App() {
               key={product.id}
               product={product}
               onAddToCart={addToCart}
+              onChatWithFarmer={handleChatWithFarmer}
             />
           ))}
         </div>
@@ -175,6 +196,21 @@ function App() {
         onClose={() => setIsOrderSuccessOpen(false)}
         orderDetails={orderDetails}
       />
+
+      <ChatList
+        isOpen={isChatListOpen}
+        onClose={() => setIsChatListOpen(false)}
+        onSelectChat={handleSelectChat}
+      />
+
+      {selectedFarmer && (
+        <ChatModal
+          isOpen={isChatModalOpen}
+          onClose={() => setIsChatModalOpen(false)}
+          farmer={selectedFarmer}
+          user={user}
+        />
+      )}
     </div>
   );
 }
